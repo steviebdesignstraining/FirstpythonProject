@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+# from telnetlib import EC
 
 
 @pytest.fixture
@@ -22,7 +23,7 @@ def driver(request):
         my_driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
     else:
         raise TypeError(f"Expected 'chrome' or 'firefox', but got {browser}")
-    my_driver.implicitly_wait(10)
+    # my_driver.implicitly_wait(10)
     yield my_driver
     print(f"Closing {browser} driver")
     my_driver.quit()
@@ -34,5 +35,3 @@ def pytest_addoption(parser):
     )
 
 
-class NoSuchElementException(WebDriverException):
-    def pytest_addoption(self):
